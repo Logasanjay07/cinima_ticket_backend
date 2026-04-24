@@ -8,16 +8,20 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 
 def reset_password(request):
-    user = User.objects.first()
+    user = User.objects.filter(username="admin").first()
 
-    if user is None:
-        return JsonResponse({"error": "No user found"})
+    if not user:
+        user = User.objects.create_superuser(
+            username="logasanjay",
+            email="logasanjay06@gmail.com",
+            password="Sanjay@2003"
+        )
+        return JsonResponse({"message": "User created"})
 
-    user.username = "logasanjay"
     user.set_password("Sanjay@2003")
     user.save()
 
-    return JsonResponse({"message": "updated"})
+    return JsonResponse({"message": "Password updated"})
 
 @api_view(['POST'])
 def signup(request):
