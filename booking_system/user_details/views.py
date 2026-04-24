@@ -4,6 +4,14 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import LoginDetails
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def reset_password(request):
+    user = User.objects.get(username="logasanjay")
+    user.set_password("Sanjay@2003")
+    user.save()
+    return HttpResponse("Password Reset Success")
 
 @api_view(['POST'])
 def signup(request):
