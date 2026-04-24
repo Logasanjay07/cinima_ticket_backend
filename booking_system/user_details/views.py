@@ -10,11 +10,14 @@ from django.http import JsonResponse
 def reset_password(request):
     user = User.objects.first()
 
+    if user is None:
+        return JsonResponse({"error": "No user found"})
+
     user.username = "logasanjay"
     user.set_password("Sanjay@2003")
     user.save()
 
-    return JsonResponse({"message": "Username & Password updated"})
+    return JsonResponse({"message": "updated"})
 
 @api_view(['POST'])
 def signup(request):
