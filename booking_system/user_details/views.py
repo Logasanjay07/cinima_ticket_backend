@@ -5,13 +5,16 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import LoginDetails
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 def reset_password(request):
-    user = User.objects.get(username="logasanjay")
+    user = User.objects.first()
+
+    user.username = "logasanjay"
     user.set_password("Sanjay@2003")
     user.save()
-    return HttpResponse("Password Reset Success")
+
+    return JsonResponse({"message": "Username & Password updated"})
 
 @api_view(['POST'])
 def signup(request):
