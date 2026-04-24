@@ -68,7 +68,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'booking_system.wsgi.application'
 
 
-# 🔥 DATABASE (Railway PostgreSQL)
+# 🔥 DATABASE (Render PostgreSQL)
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get("DATABASE_URL")
@@ -96,7 +96,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # MEDIA
